@@ -31,7 +31,7 @@ vec4 light_specular1( 1.0, 1.0, 1.0, 1.0 );
 //Objects
 Plane* plane;
 Sphere* sphere;
-Cube* cube;
+Cube* tableTop;
 Camera* cam;
 vector<Light> lights;
 vector<Drawable*>drawables;
@@ -108,10 +108,15 @@ void init()
     sphere->setModelMatrix(Translate(-1.5, 0, 0));  //scale it
     drawables.push_back(sphere);
     
-    cube = new Cube();
-    cube->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    cube->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
-    drawables.push_back(cube);
+    tableTop = new Cube();
+    
+//    tableTop->setVertices(vec4(-0.5,-0.5,0.5,1), vec4(-0.5,0.5,0.5,1), vec4(0.5,0.5,0.5,1), vec4(0.5,-0.5,0.5,1), vec4(-0.5,-0.5,-0.5,1), vec4(-0.5,0.5,-0.5,1), vec4(0.5,0.5,-0.5,1), vec4(0.5,-0.5,-0.5,1));
+    
+    tableTop -> setVertices(vec4(0.3,0.6,0.5,1),vec4(0.3,0.6,-0.5,1),vec4(-0.3,0.6,-0.5,1),vec4(-0.3,0.6,0.5,1),vec4(0.3,0.5,0.5,1),vec4(.3,.5,-.5,1),vec4(-0.3,0.5,-0.5,1),vec4(-0.3,0.5,0.5,1));
+    
+    tableTop->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+    tableTop->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
+    drawables.push_back(tableTop);
     
     plane = new Plane();
     plane->setMaterial(material_ambient2, material_diffuse2, material_specular2, material_shininess);

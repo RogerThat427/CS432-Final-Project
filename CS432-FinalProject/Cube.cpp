@@ -4,30 +4,6 @@ Cube::Cube() {
 	
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
-    buildCube();
-    program = InitShader("vshader01_v150.glsl", "fshader01_v150.glsl");
-    glUseProgram(program);
-    vpos = glGetAttribLocation(program, "vPosition");
-    npos = glGetAttribLocation(program, "vNormal");
-    mmpos = glGetUniformLocation(program, "model_matrix");
-    cmpos = glGetUniformLocation(program, "cam_matrix");
-    pmpos = glGetUniformLocation(program, "proj_matrix");
-    diffuse_loc = glGetUniformLocation(program, "matDiffuse");
-    spec_loc = glGetUniformLocation(program, "matSpecular");
-    ambient_loc = glGetUniformLocation(program, "matAmbient");
-    alpha_loc = glGetUniformLocation(program, "matAlpha");
-    
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexLocations)+sizeof(vertexNormals), NULL,
-                 GL_STATIC_DRAW);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertexLocations), vertexLocations);
-    glBufferSubData(GL_ARRAY_BUFFER, 0+sizeof(vertexLocations), sizeof(vertexNormals),
-                    vertexNormals);
-    glEnableVertexAttribArray(vpos);
-    glVertexAttribPointer(vpos, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-    glEnableVertexAttribArray(npos);
-    glVertexAttribPointer(npos, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(vertexLocations)));
 
 }
 
@@ -64,6 +40,42 @@ void Cube::makeQuad(int ind1, int ind2, int ind3, int ind4) {
     vertexLocations[index] = vertices[ind1];
     vertexNormals[index] = N2;
 	index++;
+}
+
+void Cube::setVertices(vec4 v0, vec4 v1, vec4 v2, vec4 v3, vec4 v4, vec4 v5, vec4 v6, vec4 v7){
+    vertices[0] = v0;
+    vertices[1] = v1;
+    vertices[2] = v2;
+    vertices[3] = v3;
+    vertices[4] = v4;
+    vertices[5] = v5;
+    vertices[6] = v6;
+    vertices[7] = v7;
+    
+    buildCube();
+    program = InitShader("vshader01_v150.glsl", "fshader01_v150.glsl");
+    glUseProgram(program);
+    vpos = glGetAttribLocation(program, "vPosition");
+    npos = glGetAttribLocation(program, "vNormal");
+    mmpos = glGetUniformLocation(program, "model_matrix");
+    cmpos = glGetUniformLocation(program, "cam_matrix");
+    pmpos = glGetUniformLocation(program, "proj_matrix");
+    diffuse_loc = glGetUniformLocation(program, "matDiffuse");
+    spec_loc = glGetUniformLocation(program, "matSpecular");
+    ambient_loc = glGetUniformLocation(program, "matAmbient");
+    alpha_loc = glGetUniformLocation(program, "matAlpha");
+    
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexLocations)+sizeof(vertexNormals), NULL,
+                 GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertexLocations), vertexLocations);
+    glBufferSubData(GL_ARRAY_BUFFER, 0+sizeof(vertexLocations), sizeof(vertexNormals),
+                    vertexNormals);
+    glEnableVertexAttribArray(vpos);
+    glVertexAttribPointer(vpos, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+    glEnableVertexAttribArray(npos);
+    glVertexAttribPointer(npos, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(vertexLocations)));
 }
 
 void Cube::buildCube() {

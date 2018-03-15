@@ -18,6 +18,7 @@ public:
 	~Cube();
     void setMaterial(vec4, vec4, vec4, float);
     void draw(Camera*, vector<Light>, vector<bool>);
+    void setVertices(vec4, vec4, vec4, vec4, vec4, vec4, vec4, vec4);
     
 private:
     static const unsigned int numVertices = 6 * 2 * 3;
@@ -37,9 +38,7 @@ private:
     vec4 vertexLocations[numVertices];
     vec3 vertexNormals[numVertices];
 
-	vec4 vertices[8] = { vec4(-0.5,-0.5,0.5,1),vec4(-0.5,0.5,0.5,1),vec4(0.5,0.5,0.5,1),vec4(0.5,-0.5,0.5,1),
-		vec4(-0.5,-0.5,-0.5,1),vec4(-0.5,0.5,-0.5,1),vec4(0.5,0.5,-0.5,1),vec4(0.5,-0.5,-0.5,1) };
-	
+    vec4 vertices[8];
 	
 };
 
