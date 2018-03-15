@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E5A562D7205B292600822B7B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562D6205B292600822B7B /* main.cpp */; };
+		E5A562DF205B292F00822B7B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A562DE205B292F00822B7B /* OpenGL.framework */; };
+		E5A562E1205B293400822B7B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A562E0205B293400822B7B /* GLUT.framework */; };
+		E5A562F3205B296500822B7B /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562E3205B296500822B7B /* Camera.cpp */; };
+		E5A562F4205B296500822B7B /* Cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562E6205B296500822B7B /* Cube.cpp */; };
+		E5A562F5205B296500822B7B /* Drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562E8205B296500822B7B /* Drawable.cpp */; };
+		E5A562F6205B296500822B7B /* InitShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562EA205B296500822B7B /* InitShader.cpp */; };
+		E5A562F7205B296500822B7B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562EC205B296500822B7B /* main.cpp */; };
+		E5A562F8205B296500822B7B /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562EE205B296500822B7B /* Plane.cpp */; };
+		E5A562F9205B296500822B7B /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562F0205B296500822B7B /* Sphere.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +32,25 @@
 
 /* Begin PBXFileReference section */
 		E5A562D3205B292600822B7B /* CS432-FinalProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CS432-FinalProject"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5A562D6205B292600822B7B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E5A562DE205B292F00822B7B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E5A562E0205B293400822B7B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		E5A562E2205B296500822B7B /* Angel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Angel.h; sourceTree = "<group>"; };
+		E5A562E3205B296500822B7B /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		E5A562E4205B296500822B7B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		E5A562E5205B296500822B7B /* CheckError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckError.h; sourceTree = "<group>"; };
+		E5A562E6205B296500822B7B /* Cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cube.cpp; sourceTree = "<group>"; };
+		E5A562E7205B296500822B7B /* Cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cube.h; sourceTree = "<group>"; };
+		E5A562E8205B296500822B7B /* Drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawable.cpp; sourceTree = "<group>"; };
+		E5A562E9205B296500822B7B /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
+		E5A562EA205B296500822B7B /* InitShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InitShader.cpp; sourceTree = "<group>"; };
+		E5A562EB205B296500822B7B /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		E5A562EC205B296500822B7B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E5A562ED205B296500822B7B /* mat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mat.h; sourceTree = "<group>"; };
+		E5A562EE205B296500822B7B /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
+		E5A562EF205B296500822B7B /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
+		E5A562F0205B296500822B7B /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
+		E5A562F1205B296500822B7B /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
+		E5A562F2205B296500822B7B /* vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5A562E1205B293400822B7B /* GLUT.framework in Frameworks */,
+				E5A562DF205B292F00822B7B /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +71,7 @@
 			children = (
 				E5A562D5205B292600822B7B /* CS432-FinalProject */,
 				E5A562D4205B292600822B7B /* Products */,
+				E5A562DD205B292E00822B7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +86,34 @@
 		E5A562D5205B292600822B7B /* CS432-FinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				E5A562D6205B292600822B7B /* main.cpp */,
+				E5A562E2205B296500822B7B /* Angel.h */,
+				E5A562E3205B296500822B7B /* Camera.cpp */,
+				E5A562E4205B296500822B7B /* Camera.h */,
+				E5A562E5205B296500822B7B /* CheckError.h */,
+				E5A562E6205B296500822B7B /* Cube.cpp */,
+				E5A562E7205B296500822B7B /* Cube.h */,
+				E5A562E8205B296500822B7B /* Drawable.cpp */,
+				E5A562E9205B296500822B7B /* Drawable.h */,
+				E5A562EA205B296500822B7B /* InitShader.cpp */,
+				E5A562EB205B296500822B7B /* Light.h */,
+				E5A562EC205B296500822B7B /* main.cpp */,
+				E5A562ED205B296500822B7B /* mat.h */,
+				E5A562EE205B296500822B7B /* Plane.cpp */,
+				E5A562EF205B296500822B7B /* Plane.h */,
+				E5A562F0205B296500822B7B /* Sphere.cpp */,
+				E5A562F1205B296500822B7B /* Sphere.h */,
+				E5A562F2205B296500822B7B /* vec.h */,
 			);
 			path = "CS432-FinalProject";
+			sourceTree = "<group>";
+		};
+		E5A562DD205B292E00822B7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5A562E0205B293400822B7B /* GLUT.framework */,
+				E5A562DE205B292F00822B7B /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +173,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5A562D7205B292600822B7B /* main.cpp in Sources */,
+				E5A562F8205B296500822B7B /* Plane.cpp in Sources */,
+				E5A562F5205B296500822B7B /* Drawable.cpp in Sources */,
+				E5A562F4205B296500822B7B /* Cube.cpp in Sources */,
+				E5A562F6205B296500822B7B /* InitShader.cpp in Sources */,
+				E5A562F9205B296500822B7B /* Sphere.cpp in Sources */,
+				E5A562F7205B296500822B7B /* main.cpp in Sources */,
+				E5A562F3205B296500822B7B /* Camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
