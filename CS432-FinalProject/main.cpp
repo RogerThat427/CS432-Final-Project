@@ -18,6 +18,7 @@ void resize(int width, int height);
 void close(void);
 void specialKeyboard(int, int, int);
 void timerCallback(int value);
+void makeMove(int move);
 vec4 light_position0(0,0,0,0 );
 vec4 light_position1(0, 0, 0, 0.0 );
 
@@ -42,6 +43,18 @@ vector<bool>enabled;
 double theta = 45;
 int interval = 1;
 bool using2 = false;
+bool player1 = false;
+vec4 material_ambient( 1.0, 0.0, 1.0, 1.0 );
+vec4 material_diffuse( 1.0, 0.8, 0.0, 1.0 );
+vec4 material_specular( 1.0, 0.8, 0.0, 1.0 );
+
+vec4 material_ambient2( 0, 1, 0, 1.0 );
+vec4 material_diffuse2( 0, 1,1, 0 );
+vec4 material_specular2( 0, 1, 0, 1.0 );
+float material_shininess = 100.0;
+
+vec2 coordinates[9] = {vec2(-1,-1),vec2(0,-1),vec2(1,-1),vec2(-1,0),vec2(0,0),vec2(1,0),vec2(-1,1),vec2(0,1),vec2(1,1)};
+
 
 GLuint windowID=0;
 //----------------------------------------------------------------------------
@@ -95,14 +108,6 @@ void init()
     cam1 = new Camera(0,10,0,false);
     cam = cam1;
     
-    vec4 material_ambient( 1.0, 0.0, 1.0, 1.0 );
-    vec4 material_diffuse( 1.0, 0.8, 0.0, 1.0 );
-    vec4 material_specular( 1.0, 0.8, 0.0, 1.0 );
-    
-    vec4 material_ambient2( 0, 1, 0, 1.0 );
-    vec4 material_diffuse2( 0, 1,1, 0 );
-    vec4 material_specular2( 0, 1, 0, 1.0 );
-    float material_shininess = 100.0;
     
     
     enabled.push_back(true);
@@ -110,7 +115,7 @@ void init()
     
     sphere = new Sphere();
     sphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    sphere->setModelMatrix(Translate(-1.5, 0, 0));  //scale it
+    sphere->setModelMatrix(Translate(-5, 0, 0));  //scale it
     drawables.push_back(sphere);
     
     tableTop = new Cube();
@@ -158,6 +163,9 @@ void resize(int w, int h) {
 }
 
 
+
+
+
 //----------------------------------------------------------------------------
 //Keyboard event callback
 void keyboard( unsigned char key, int x, int y )
@@ -200,7 +208,35 @@ void keyboard( unsigned char key, int x, int y )
             cam->rollCClockwise();
             glutPostRedisplay();
             break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            int k = (int)key - 49;
+            makeMove(k);
+            break;
     }
+}
+
+void makeMove(int position){
+    if(player1){
+        Cube* newCube = new Cube();
+        newCube -> setVertices(vec4(0.3,0.6,0.5,1),vec4(0.3,0.6,-0.5,1),vec4(-0.6,0.6,-0.5,1),vec4(-0.6,0.6,0.5,1),vec4(0.3,0.5,0.5,1),vec4(.3,.5,-.5,1),vec4(-0.6,0.5,-0.5,1),vec4(-0.6,0.5,0.5,1));
+        drawables.push_back(newCube);
+    } else {
+        Sphere* newSphere = new Sphere();
+        newSphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+        int x = coordinates[position].x;
+        int z = coordinates[position].y;
+        newSphere->setModelMatrix(Translate(x, 0.35, z));  //scale it
+        drawables.push_back(newSphere);
+    }
+    glutPostRedisplay();
 }
 
 void specialKeyboard( int key, int x, int y )
