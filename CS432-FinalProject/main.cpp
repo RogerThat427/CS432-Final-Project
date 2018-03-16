@@ -31,7 +31,6 @@ vec4 light_diffuse1( 1.0, 1.0, 1.0, 1.0 );
 vec4 light_specular1( 1.0, 1.0, 1.0, 1.0 );
 //Objects
 Plane* plane;
-Sphere* sphere;
 Cube* tableTop;
 Cube* legOne;
 Cube* legTwo;
@@ -57,7 +56,7 @@ vec4 material_diffuse2( 0, 1,1, 0 );
 vec4 material_specular2( 0, 1, 0, 1.0 );
 float material_shininess = 100.0;
 
-vec2 coordinates[9] = {vec2(-1,-1),vec2(0,-1),vec2(1,-1),vec2(-1,0),vec2(0,0),vec2(1,0),vec2(-1,1),vec2(0,1),vec2(1,1)};
+vec2 coordinates[9] = {vec2(-.7,-0.7),vec2(0,-0.7),vec2(.7,-0.7),vec2(-0.7,0),vec2(0,0),vec2(0.7,0),vec2(-0.7,0.7),vec2(0,0.7),vec2(0.7,0.7)};
 
 
 GLuint windowID=0;
@@ -108,7 +107,7 @@ void init()
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glEnable(GL_DEPTH_TEST);
     
-    cam2 = new Camera(0,0,10,true);
+    cam2 = new Camera(0,.5,10,true);
     cam1 = new Camera(0,10,0,false);
     cam = cam1;
     
@@ -116,11 +115,6 @@ void init()
     
     enabled.push_back(true);
     enabled.push_back(true);
-    
-    sphere = new Sphere();
-    sphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    sphere->setModelMatrix(Translate(-5, 0, 0));  //scale it
-    drawables.push_back(sphere);
     
     tableTop = new Cube();
     legOne = new Cube();
@@ -251,9 +245,9 @@ void makeMove(int position){
     } else {
         Sphere* newSphere = new Sphere();
         newSphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-        int x = coordinates[position].x;
-        int z = coordinates[position].y;
-        newSphere->setModelMatrix(Translate(x, 0.35, z));  //scale it
+        float x = coordinates[position].x;
+        float z = coordinates[position].y;
+        newSphere->setModelMatrix(Translate(x, .7, z));  //scale it
         drawables.push_back(newSphere);
     }
     glutPostRedisplay();
