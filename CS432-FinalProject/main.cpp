@@ -238,6 +238,8 @@ void keyboard( unsigned char key, int x, int y )
 }
 
 void makeMove(int position){
+    float x = coordinates[position].x;
+    float z = coordinates[position].y;
     if(player1){
         Cube* newCube = new Cube();
         newCube -> setVertices(vec4(0.3,0.6,0.5,1),vec4(0.3,0.6,-0.5,1),vec4(-0.6,0.6,-0.5,1),vec4(-0.6,0.6,0.5,1),vec4(0.3,0.5,0.5,1),vec4(.3,.5,-.5,1),vec4(-0.6,0.5,-0.5,1),vec4(-0.6,0.5,0.5,1));
@@ -245,11 +247,10 @@ void makeMove(int position){
     } else {
         Sphere* newSphere = new Sphere();
         newSphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-        float x = coordinates[position].x;
-        float z = coordinates[position].y;
         newSphere->setModelMatrix(Translate(x, .7, z));  //scale it
         drawables.push_back(newSphere);
     }
+    player1 = !player1;
     glutPostRedisplay();
 }
 
