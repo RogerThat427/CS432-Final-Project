@@ -89,9 +89,9 @@ vec4 Sphere::unit(vec4 p) {
 }
 
 void Sphere::triangle(vec4 ai, vec4 bi, vec4 ci){
-    vec3 a = vec3(ai.x,ai.y,ai.z);
-    vec3 b = vec3(bi.x,bi.y,bi.z);
-    vec3 c = vec3(ci.x,ci.y,ci.z);
+    vec3 a = vec3(ai.x/10,ai.y/10,ai.z/10);
+    vec3 b = vec3(bi.x/10,bi.y/10,bi.z/10);
+    vec3 c = vec3(ci.x/10,ci.y/10,ci.z/10);
     
     vec3 N = normalize(cross(b-a,c-a));
     

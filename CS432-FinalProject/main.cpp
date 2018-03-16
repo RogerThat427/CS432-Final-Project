@@ -18,6 +18,7 @@ void resize(int width, int height);
 void close(void);
 void specialKeyboard(int, int, int);
 void timerCallback(int value);
+void makeMove(int move);
 vec4 light_position0(0,0,0,0 );
 vec4 light_position1(0, 0, 0, 0.0 );
 
@@ -45,6 +46,18 @@ vector<bool>enabled;
 double theta = 45;
 int interval = 1;
 bool using2 = false;
+bool player1 = false;
+vec4 material_ambient( 1.0, 0.0, 1.0, 1.0 );
+vec4 material_diffuse( 1.0, 0.8, 0.0, 1.0 );
+vec4 material_specular( 1.0, 0.8, 0.0, 1.0 );
+
+vec4 material_ambient2( 0, 1, 0, 1.0 );
+vec4 material_diffuse2( 0, 1,1, 0 );
+vec4 material_specular2( 0, 1, 0, 1.0 );
+float material_shininess = 100.0;
+
+vec2 coordinates[9] = {vec2(-.7,-0.7),vec2(0,-0.7),vec2(.7,-0.7),vec2(-0.7,0),vec2(0,0),vec2(0.7,0),vec2(-0.7,0.7),vec2(0,0.7),vec2(0.7,0.7)};
+
 
 GLuint windowID=0;
 //----------------------------------------------------------------------------
@@ -94,18 +107,10 @@ void init()
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glEnable(GL_DEPTH_TEST);
     
-    cam2 = new Camera(0,0,10,true);
+    cam2 = new Camera(0,.5,10,true);
     cam1 = new Camera(0,10,0,false);
     cam = cam1;
     
-    vec4 material_ambient( 1.0, 0.0, 1.0, 1.0 );
-    vec4 material_diffuse( 1.0, 0.8, 0.0, 1.0 );
-    vec4 material_specular( 1.0, 0.8, 0.0, 1.0 );
-    
-    vec4 material_ambient2( 0, 1, 0, 1.0 );
-    vec4 material_diffuse2( 0, 1,1, 0 );
-    vec4 material_specular2( 0, 1, 0, 1.0 );
-    float material_shininess = 100.0;
     
     
     enabled.push_back(true);
@@ -172,6 +177,9 @@ void resize(int w, int h) {
 }
 
 
+
+
+
 //----------------------------------------------------------------------------
 //Keyboard event callback
 void keyboard( unsigned char key, int x, int y )
@@ -214,7 +222,35 @@ void keyboard( unsigned char key, int x, int y )
             cam->rollCClockwise();
             glutPostRedisplay();
             break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            int k = (int)key - 49;
+            makeMove(k);
+            break;
     }
+}
+
+void makeMove(int position){
+    if(player1){
+        Cube* newCube = new Cube();
+        newCube -> setVertices(vec4(0.3,0.6,0.5,1),vec4(0.3,0.6,-0.5,1),vec4(-0.6,0.6,-0.5,1),vec4(-0.6,0.6,0.5,1),vec4(0.3,0.5,0.5,1),vec4(.3,.5,-.5,1),vec4(-0.6,0.5,-0.5,1),vec4(-0.6,0.5,0.5,1));
+        drawables.push_back(newCube);
+    } else {
+        Sphere* newSphere = new Sphere();
+        newSphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+        float x = coordinates[position].x;
+        float z = coordinates[position].y;
+        newSphere->setModelMatrix(Translate(x, .7, z));  //scale it
+        drawables.push_back(newSphere);
+    }
+    glutPostRedisplay();
 }
 
 void specialKeyboard( int key, int x, int y )
