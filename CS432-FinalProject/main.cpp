@@ -33,6 +33,10 @@ Plane* plane;
 Sphere* sphere;
 Cube* tableTop;
 Cube* legOne;
+Cube* legTwo;
+Cube* legThree;
+Cube* legFour;
+
 Camera* cam;
 Camera* cam1;
 Camera* cam2;
@@ -115,18 +119,34 @@ void init()
     
     tableTop = new Cube();
     legOne = new Cube();
+    legTwo = new Cube();
+    legThree = new Cube();
+    legFour = new Cube();
     
-    tableTop -> setVertices(vec4(0.3,0.6,0.5,1),vec4(0.3,0.6,-0.5,1),vec4(-0.6,0.6,-0.5,1),vec4(-0.6,0.6,0.5,1),vec4(0.3,0.5,0.5,1),vec4(.3,.5,-.5,1),vec4(-0.6,0.5,-0.5,1),vec4(-0.6,0.5,0.5,1));
-    legOne -> setVertices(vec4(0.2,0.5,0.4,1), vec4(0.2,0.5,0.3,1), vec4(0.1,0.5,0.3,1), vec4(0.1,0.5,0.4,1), vec4(0.2,0.0,0.4,1), vec4(0.2,0.0,0.3,1), vec4(0.1,0.0,0.3,1), vec4(0.1,0.0,0.4,1));
+    tableTop -> setVertices(vec4(0.3,0.3,0.5,1),vec4(0.3,0.3,-0.5,1),vec4(-0.6,0.3,-0.5,1),vec4(-0.6,0.3,0.5,1),vec4(0.3,0.2,0.5,1),vec4(.3,.2,-.5,1),vec4(-0.6,0.2,-0.5,1),vec4(-0.6,0.2,0.5,1));
+    legOne -> setVertices(vec4(0.2,0.2,0.4,1), vec4(0.2,0.2,0.3,1), vec4(0.1,0.2,0.3,1), vec4(0.1,0.2,0.4,1), vec4(0.2,-0.3,0.4,1), vec4(0.2,-0.3,0.3,1), vec4(0.1,-0.3,0.3,1), vec4(0.1,-0.3,0.4,1));
+    legTwo -> setVertices(vec4(-0.5,0.2,0.4,1), vec4(-0.5,0.2,0.3,1), vec4(-0.4,0.2,0.3,1), vec4(-0.4,0.2,0.4,1), vec4(-0.5,-0.3,0.4,1), vec4(-0.5,-0.3,0.3,1), vec4(-0.4,-0.3,0.3,1), vec4(-0.4,-0.3,0.4,1));
+    legThree -> setVertices(vec4(-0.5,0.2,-0.4,1), vec4(-0.5,0.2,-0.3,1), vec4(-0.4,0.2,-0.4,1), vec4(-0.4,0.2,-0.3,1), vec4(-0.5,-0.3,-0.4,1), vec4(-0.5,-0.3,-0.3,1), vec4(-0.4,-0.3,-0.4,1), vec4(-0.4,-0.3,-0.3,1));
+    legFour -> setVertices(vec4(0.2,0.2,-0.4,1), vec4(0.2,0.2,-0.3,1), vec4(0.1,0.2,-0.4,1), vec4(0.1,0.2,-0.3,1), vec4(0.2,-0.3,-0.4,1), vec4(0.2,-0.3,-0.3,1), vec4(0.1,-0.3,-0.4,1), vec4(0.1,-0.3,-0.3,1));
     
     tableTop->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
     legOne->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+    legTwo->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+    legThree->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+    legFour->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
     
     tableTop->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
     legOne->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
+    legTwo->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
+    legThree->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
+    legFour->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
+    
     
     drawables.push_back(tableTop);
     drawables.push_back(legOne);
+    drawables.push_back(legTwo);
+    drawables.push_back(legThree);
+    drawables.push_back(legFour);
     
     plane = new Plane();
     plane->setMaterial(material_ambient2, material_diffuse2, material_specular2, material_shininess);
