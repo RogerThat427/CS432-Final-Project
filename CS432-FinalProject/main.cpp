@@ -30,7 +30,6 @@ vec4 light_diffuse1( 1.0, 1.0, 1.0, 1.0 );
 vec4 light_specular1( 1.0, 1.0, 1.0, 1.0 );
 //Objects
 Plane* plane;
-Sphere* sphere;
 Cube* tableTop;
 Cube* legOne;
 Cube* legTwo;
@@ -111,11 +110,6 @@ void init()
     
     enabled.push_back(true);
     enabled.push_back(true);
-    
-    sphere = new Sphere();
-    sphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    sphere->setModelMatrix(Translate(-1.5, 0, 0));  //scale it
-    drawables.push_back(sphere);
     
     tableTop = new Cube();
     legOne = new Cube();
