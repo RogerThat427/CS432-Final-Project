@@ -33,11 +33,14 @@ Plane* plane;
 Sphere* sphere;
 Cube* tableTop;
 Camera* cam;
+Camera* cam1;
+Camera* cam2;
 vector<Light> lights;
 vector<Drawable*>drawables;
 vector<bool>enabled;
 double theta = 45;
 int interval = 1;
+bool using2 = false;
 
 GLuint windowID=0;
 //----------------------------------------------------------------------------
@@ -87,8 +90,9 @@ void init()
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glEnable(GL_DEPTH_TEST);
     
-    cam = new Camera(0,0,10,true);
-    
+    cam2 = new Camera(0,0,10,true);
+    cam1 = new Camera(0,10,0,false);
+    cam = cam1;
     
     vec4 material_ambient( 1.0, 0.0, 1.0, 1.0 );
     vec4 material_diffuse( 1.0, 0.8, 0.0, 1.0 );
@@ -99,9 +103,9 @@ void init()
     vec4 material_specular2( 0, 1, 0, 1.0 );
     float material_shininess = 100.0;
     
-
+    
     enabled.push_back(true);
-    enabled.push_back(false);
+    enabled.push_back(true);
     
     sphere = new Sphere();
     sphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
@@ -110,7 +114,7 @@ void init()
     
     tableTop = new Cube();
     
-//    tableTop->setVertices(vec4(-0.5,-0.5,0.5,1), vec4(-0.5,0.5,0.5,1), vec4(0.5,0.5,0.5,1), vec4(0.5,-0.5,0.5,1), vec4(-0.5,-0.5,-0.5,1), vec4(-0.5,0.5,-0.5,1), vec4(0.5,0.5,-0.5,1), vec4(0.5,-0.5,-0.5,1));
+    //    tableTop->setVertices(vec4(-0.5,-0.5,0.5,1), vec4(-0.5,0.5,0.5,1), vec4(0.5,0.5,0.5,1), vec4(0.5,-0.5,0.5,1), vec4(-0.5,-0.5,-0.5,1), vec4(-0.5,0.5,-0.5,1), vec4(0.5,0.5,-0.5,1), vec4(0.5,-0.5,-0.5,1));
     
     tableTop -> setVertices(vec4(0.3,0.6,0.5,1),vec4(0.3,0.6,-0.5,1),vec4(-0.3,0.6,-0.5,1),vec4(-0.3,0.6,0.5,1),vec4(0.3,0.5,0.5,1),vec4(.3,.5,-.5,1),vec4(-0.3,0.5,-0.5,1),vec4(-0.3,0.5,0.5,1));
     
@@ -154,7 +158,12 @@ void keyboard( unsigned char key, int x, int y )
 {
     switch( key ) {
         case ' ':
-            enabled[1] = !enabled[1];
+            if(using2){
+                cam = cam1;
+            } else {
+                cam = cam2;
+            }
+            using2 = !using2;
             display();
             break;
         case 033:  // Escape key
@@ -212,11 +221,6 @@ void timerCallback(int value)
     
     if(theta==360.1){
         theta = 0;
-    }
-    if(theta>100&&theta<300){
-        enabled[0] = false;
-    } else {
-        enabled[0] = true;
     }
     float rad = theta*2.0*3.14/360;
     light_position0 = vec4(0,20*sin(rad), 20*cos(rad),0.0 );
