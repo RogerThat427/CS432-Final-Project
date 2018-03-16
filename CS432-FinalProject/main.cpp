@@ -135,11 +135,11 @@ void init()
     legThree->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
     legFour->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
     
-    tableTop->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
-    legOne->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
-    legTwo->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
-    legThree->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
-    legFour->setModelMatrix(Scale(2, 2, 2)*Translate(1.5, 0, 0));  //scale it
+    tableTop->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
+    legOne->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
+    legTwo->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
+    legThree->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
+    legFour->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
     
     
     drawables.push_back(tableTop);
