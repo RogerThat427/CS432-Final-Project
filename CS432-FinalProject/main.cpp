@@ -29,6 +29,11 @@ vec4 light_specular0( 1.0, 1.0, 1.0, 0.0 );
 vec4 light_ambient1( 0.2, 0.2, 0.2, 1.0 );
 vec4 light_diffuse1( 1.0, 1.0, 1.0, 1.0 );
 vec4 light_specular1( 1.0, 1.0, 1.0, 1.0 );
+
+vec4 cubeVerticies[8];
+
+
+
 //Objects
 Plane* plane;
 Cube* tableTop;
@@ -110,8 +115,7 @@ void init()
     cam2 = new Camera(0,.5,10,true);
     cam1 = new Camera(0,10,0,false);
     cam = cam1;
-    
-    
+
     
     enabled.push_back(true);
     enabled.push_back(true);
@@ -227,14 +231,104 @@ void keyboard( unsigned char key, int x, int y )
             glutPostRedisplay();
             break;
         case '1':
+            /*
+             cubeVerticies[0] = vec4(-0.4,0.4,-0.4,1);
+             cubeVerticies[1] = vec4(-0.4,0.4,-0.3,1);
+             cubeVerticies[2] = vec4(-0.3,0.4,-0.3,1);
+             cubeVerticies[3] = vec4(-0.3,0.4,-0.4,1);
+             cubeVerticies[4] = vec4(-0.4,0.3,-0.4,1);
+             cubeVerticies[5] = vec4(-0.4,0.3,-0.3,1);
+             cubeVerticies[6] = vec4(-0.3,0.3,-0.3,1);
+             cubeVerticies[7] = vec4(-0.3,0.3,-0.4,1);
+             */
         case '2':
+            /*
+            cubeVerticies[0] = vec4(0.05,0.4,-0.4,1);
+            cubeVerticies[1] = vec4(0.05,0.4,-0.3,1);
+            cubeVerticies[2] = vec4(-0.05,0.4,-0.3,1);
+            cubeVerticies[3] = vec4(-0.05,0.4,-0.4,1);
+            cubeVerticies[4] = vec4(0.05,0.3,-0.4,1);
+            cubeVerticies[5] = vec4(0.05,0.3,-0.3,1);
+            cubeVerticies[6] = vec4(-0.05,0.3,-0.3,1);
+            cubeVerticies[7] = vec4(-0.05,0.3,-0.4,1);
+             */
         case '3':
+            /*
+            cubeVerticies[0] = vec4(0.4,0.4,-0.4,1);
+            cubeVerticies[1] = vec4(0.4,0.4,-0.3,1);
+            cubeVerticies[2] = vec4(0.3,0.4,-0.3,1);
+            cubeVerticies[3] = vec4(0.3,0.4,-0.4,1);
+            cubeVerticies[4] = vec4(0.4,0.3,-0.4,1);
+            cubeVerticies[5] = vec4(0.4,0.3,-0.3,1);
+            cubeVerticies[6] = vec4(0.3,0.3,-0.3,1);
+            cubeVerticies[7] = vec4(0.3,0.3,-0.4,1);
+             */
         case '4':
+            /*
+            cubeVerticies[0] = vec4(-0.4,0.4,-0.05,1);
+            cubeVerticies[1] = vec4(-0.4,0.4,0.05,1);
+            cubeVerticies[2] = vec4(-0.3,0.4,0.05,1);
+            cubeVerticies[3] = vec4(-0.3,0.4,-0.05,1);
+            cubeVerticies[4] = vec4(-0.4,0.3,-0.05,1);
+            cubeVerticies[5] = vec4(-0.4,0.3,0.05,1);
+            cubeVerticies[6] = vec4(-0.3,0.3,0.05,1);
+            cubeVerticies[7] = vec4(-0.3,0.3,-0.05,1);
+             */
         case '5':
+            /*
+            cubeVerticies[0] = vec4(0.05,0.4,-0.05,1);
+            cubeVerticies[1] = vec4(0.05,0.4,0.05,1);
+            cubeVerticies[2] = vec4(-0.05,0.4,0.05,1);
+            cubeVerticies[3] = vec4(-0.05,0.4,-0.05,1);
+            cubeVerticies[4] = vec4(0.05,0.3,-0.05,1);
+            cubeVerticies[5] = vec4(0.05,0.3,0.05,1);
+            cubeVerticies[6] = vec4(-0.05,0.3,0.05,1);
+            cubeVerticies[7] = vec4(-0.05,0.3,-0.05,1);
+             */
         case '6':
+            /*
+            cubeVerticies[0] = vec4(0.4,0.4,-0.05,1);
+            cubeVerticies[1] = vec4(0.4,0.4,0.05,1);
+            cubeVerticies[2] = vec4(0.3,0.4,0.05,1);
+            cubeVerticies[3] = vec4(0.3,0.4,-0.05,1);
+            cubeVerticies[4] = vec4(0.4,0.3,-0.05,1);
+            cubeVerticies[5] = vec4(0.4,0.3,0.05,1);
+            cubeVerticies[6] = vec4(0.3,0.3,0.05,1);
+            cubeVerticies[7] = vec4(0.3,0.3,-0.05,1);
+             */
         case '7':
+            /*
+            cubeVerticies[0] = vec4(-0.4,0.4,0.4,1);
+            cubeVerticies[1] = vec4(-0.4,0.4,0.3,1);
+            cubeVerticies[2] = vec4(-0.3,0.4,0.3,1);
+            cubeVerticies[3] = vec4(-0.3,0.4,0.4,1);
+            cubeVerticies[4] = vec4(-0.4,0.3,0.4,1);
+            cubeVerticies[5] = vec4(-0.4,0.3,0.3,1);
+            cubeVerticies[6] = vec4(-0.3,0.3,0.3,1);
+            cubeVerticies[7] = vec4(-0.3,0.3,0.4,1);
+             */
         case '8':
+            /*
+            cubeVerticies[0] = vec4(0.05,0.4,0.4,1);
+            cubeVerticies[1] = vec4(0.05,0.4,0.3,1);
+            cubeVerticies[2] = vec4(-0.05,0.4,0.3,1);
+            cubeVerticies[3] = vec4(-0.05,0.4,0.4,1);
+            cubeVerticies[4] = vec4(0.05,0.3,0.4,1);
+            cubeVerticies[5] = vec4(0.05,0.3,0.3,1);
+            cubeVerticies[6] = vec4(-0.05,0.3,0.3,1);
+            cubeVerticies[7] = vec4(-0.05,0.3,0.4,1);
+             */
         case '9':
+            /*
+            cubeVerticies[0] = vec4(0.4,0.4,0.4,1);
+            cubeVerticies[1] = vec4(0.4,0.4,0.3,1);
+            cubeVerticies[2] = vec4(0.3,0.4,0.3,1);
+            cubeVerticies[3] = vec4(0.3,0.4,0.4,1);
+            cubeVerticies[4] = vec4(0.4,0.3,0.4,1);
+            cubeVerticies[5] = vec4(0.4,0.3,0.3,1);
+            cubeVerticies[6] = vec4(0.3,0.3,0.3,1);
+            cubeVerticies[7] = vec4(0.3,0.3,0.4,1);
+             */
             int k = (int)key - 49;
             makeMove(k);
             break;
@@ -246,7 +340,9 @@ void makeMove(int position){
     float z = coordinates[position].y;
     if(player1){
         Cube* newCube = new Cube();
-        newCube -> setVertices(vec4(0.3,0.6,0.5,1),vec4(0.3,0.6,-0.5,1),vec4(-0.6,0.6,-0.5,1),vec4(-0.6,0.6,0.5,1),vec4(0.3,0.5,0.5,1),vec4(.3,.5,-.5,1),vec4(-0.6,0.5,-0.5,1),vec4(-0.6,0.5,0.5,1));
+        newCube -> setVertices(cubeVerticies[0], cubeVerticies[1], cubeVerticies[2], cubeVerticies[3], cubeVerticies[4], cubeVerticies[5], cubeVerticies[6], cubeVerticies[7]);
+        newCube->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+        newCube->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
         drawables.push_back(newCube);
     } else {
         Sphere* newSphere = new Sphere();
