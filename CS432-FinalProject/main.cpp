@@ -18,7 +18,14 @@ void resize(int width, int height);
 void close(void);
 void specialKeyboard(int, int, int);
 void timerCallback(int value);
+
 void makeMove(int move);
+int getPlayerNumber();
+void checkForWin();
+void cubeWins();
+void sphereWins();
+void noWins();
+
 vec4 light_position0(0,0,0,0 );
 vec4 light_position1(0, 0, 0, 0.0 );
 
@@ -31,6 +38,7 @@ vec4 light_diffuse1( 1.0, 1.0, 1.0, 1.0 );
 vec4 light_specular1( 1.0, 1.0, 1.0, 1.0 );
 
 vec4 cubeVerticies[8];
+int isOccupied[9];
 
 
 
@@ -51,7 +59,7 @@ vector<bool>enabled;
 double theta = 45;
 int interval = 1;
 bool using2 = false;
-bool player1 = false;
+bool playerCube = false;
 vec4 material_ambient( 1.0, 0.0, 1.0, 1.0 );
 vec4 material_diffuse( 1.0, 0.8, 0.0, 1.0 );
 vec4 material_specular( 1.0, 0.8, 0.0, 1.0 );
@@ -69,6 +77,12 @@ GLuint windowID=0;
 
 int main(int argc, char **argv)
 {
+    //Allow for placement on board
+    for(int i = 0; i < 9; i++){
+        isOccupied[i] = false;
+    }
+    
+    
     //initialize GLUT
     glutInit(&argc, argv);
 #ifdef __APPLE__
@@ -232,112 +246,139 @@ void keyboard( unsigned char key, int x, int y )
             glutPostRedisplay();
             break;
         case '1':
-            cubeVerticies[0] = vec4(-0.4,0.4,-0.4,1);
-            cubeVerticies[1] = vec4(-0.4,0.4,-0.3,1);
-            cubeVerticies[2] = vec4(-0.3,0.4,-0.3,1);
-            cubeVerticies[3] = vec4(-0.3,0.4,-0.4,1);
-            cubeVerticies[4] = vec4(-0.4,0.3,-0.4,1);
-            cubeVerticies[5] = vec4(-0.4,0.3,-0.3,1);
-            cubeVerticies[6] = vec4(-0.3,0.3,-0.3,1);
-            cubeVerticies[7] = vec4(-0.3,0.3,-0.4,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[0] == 0){
+                cubeVerticies[0] = vec4(-0.4,0.4,-0.4,1);
+                cubeVerticies[1] = vec4(-0.4,0.4,-0.3,1);
+                cubeVerticies[2] = vec4(-0.3,0.4,-0.3,1);
+                cubeVerticies[3] = vec4(-0.3,0.4,-0.4,1);
+                cubeVerticies[4] = vec4(-0.4,0.3,-0.4,1);
+                cubeVerticies[5] = vec4(-0.4,0.3,-0.3,1);
+                cubeVerticies[6] = vec4(-0.3,0.3,-0.3,1);
+                cubeVerticies[7] = vec4(-0.3,0.3,-0.4,1);
+                k = (int)key - 49;
+                isOccupied[0] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '2':
-            cubeVerticies[0] = vec4(0.05,0.4,-0.4,1);
-            cubeVerticies[1] = vec4(0.05,0.4,-0.3,1);
-            cubeVerticies[2] = vec4(-0.05,0.4,-0.3,1);
-            cubeVerticies[3] = vec4(-0.05,0.4,-0.4,1);
-            cubeVerticies[4] = vec4(0.05,0.3,-0.4,1);
-            cubeVerticies[5] = vec4(0.05,0.3,-0.3,1);
-            cubeVerticies[6] = vec4(-0.05,0.3,-0.3,1);
-            cubeVerticies[7] = vec4(-0.05,0.3,-0.4,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[1] == 0){
+                cubeVerticies[0] = vec4(0.05,0.4,-0.4,1);
+                cubeVerticies[1] = vec4(0.05,0.4,-0.3,1);
+                cubeVerticies[2] = vec4(-0.05,0.4,-0.3,1);
+                cubeVerticies[3] = vec4(-0.05,0.4,-0.4,1);
+                cubeVerticies[4] = vec4(0.05,0.3,-0.4,1);
+                cubeVerticies[5] = vec4(0.05,0.3,-0.3,1);
+                cubeVerticies[6] = vec4(-0.05,0.3,-0.3,1);
+                cubeVerticies[7] = vec4(-0.05,0.3,-0.4,1);
+                k = (int)key - 49;
+                isOccupied[1] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '3':
-            cubeVerticies[0] = vec4(0.4,0.4,-0.4,1);
-            cubeVerticies[1] = vec4(0.4,0.4,-0.3,1);
-            cubeVerticies[2] = vec4(0.3,0.4,-0.3,1);
-            cubeVerticies[3] = vec4(0.3,0.4,-0.4,1);
-            cubeVerticies[4] = vec4(0.4,0.3,-0.4,1);
-            cubeVerticies[5] = vec4(0.4,0.3,-0.3,1);
-            cubeVerticies[6] = vec4(0.3,0.3,-0.3,1);
-            cubeVerticies[7] = vec4(0.3,0.3,-0.4,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[2] == 0){
+                cubeVerticies[0] = vec4(0.4,0.4,-0.4,1);
+                cubeVerticies[1] = vec4(0.4,0.4,-0.3,1);
+                cubeVerticies[2] = vec4(0.3,0.4,-0.3,1);
+                cubeVerticies[3] = vec4(0.3,0.4,-0.4,1);
+                cubeVerticies[4] = vec4(0.4,0.3,-0.4,1);
+                cubeVerticies[5] = vec4(0.4,0.3,-0.3,1);
+                cubeVerticies[6] = vec4(0.3,0.3,-0.3,1);
+                cubeVerticies[7] = vec4(0.3,0.3,-0.4,1);
+                k = (int)key - 49;
+                isOccupied[2] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '4':
-            cubeVerticies[0] = vec4(-0.4,0.4,-0.05,1);
-            cubeVerticies[1] = vec4(-0.4,0.4,0.05,1);
-            cubeVerticies[2] = vec4(-0.3,0.4,0.05,1);
-            cubeVerticies[3] = vec4(-0.3,0.4,-0.05,1);
-            cubeVerticies[4] = vec4(-0.4,0.3,-0.05,1);
-            cubeVerticies[5] = vec4(-0.4,0.3,0.05,1);
-            cubeVerticies[6] = vec4(-0.3,0.3,0.05,1);
-            cubeVerticies[7] = vec4(-0.3,0.3,-0.05,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[3] == 0){
+                cubeVerticies[0] = vec4(-0.4,0.4,-0.05,1);
+                cubeVerticies[1] = vec4(-0.4,0.4,0.05,1);
+                cubeVerticies[2] = vec4(-0.3,0.4,0.05,1);
+                cubeVerticies[3] = vec4(-0.3,0.4,-0.05,1);
+                cubeVerticies[4] = vec4(-0.4,0.3,-0.05,1);
+                cubeVerticies[5] = vec4(-0.4,0.3,0.05,1);
+                cubeVerticies[6] = vec4(-0.3,0.3,0.05,1);
+                cubeVerticies[7] = vec4(-0.3,0.3,-0.05,1);
+                k = (int)key - 49;
+                isOccupied[3] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '5':
-            cubeVerticies[0] = vec4(0.05,0.4,-0.05,1);
-            cubeVerticies[1] = vec4(0.05,0.4,0.05,1);
-            cubeVerticies[2] = vec4(-0.05,0.4,0.05,1);
-            cubeVerticies[3] = vec4(-0.05,0.4,-0.05,1);
-            cubeVerticies[4] = vec4(0.05,0.3,-0.05,1);
-            cubeVerticies[5] = vec4(0.05,0.3,0.05,1);
-            cubeVerticies[6] = vec4(-0.05,0.3,0.05,1);
-            cubeVerticies[7] = vec4(-0.05,0.3,-0.05,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[4] == 0){
+                cubeVerticies[0] = vec4(0.05,0.4,-0.05,1);
+                cubeVerticies[1] = vec4(0.05,0.4,0.05,1);
+                cubeVerticies[2] = vec4(-0.05,0.4,0.05,1);
+                cubeVerticies[3] = vec4(-0.05,0.4,-0.05,1);
+                cubeVerticies[4] = vec4(0.05,0.3,-0.05,1);
+                cubeVerticies[5] = vec4(0.05,0.3,0.05,1);
+                cubeVerticies[6] = vec4(-0.05,0.3,0.05,1);
+                cubeVerticies[7] = vec4(-0.05,0.3,-0.05,1);
+                k = (int)key - 49;
+                isOccupied[4] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '6':
-            cubeVerticies[0] = vec4(0.4,0.4,-0.05,1);
-            cubeVerticies[1] = vec4(0.4,0.4,0.05,1);
-            cubeVerticies[2] = vec4(0.3,0.4,0.05,1);
-            cubeVerticies[3] = vec4(0.3,0.4,-0.05,1);
-            cubeVerticies[4] = vec4(0.4,0.3,-0.05,1);
-            cubeVerticies[5] = vec4(0.4,0.3,0.05,1);
-            cubeVerticies[6] = vec4(0.3,0.3,0.05,1);
-            cubeVerticies[7] = vec4(0.3,0.3,-0.05,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[5] == 0){
+                cubeVerticies[0] = vec4(0.4,0.4,-0.05,1);
+                cubeVerticies[1] = vec4(0.4,0.4,0.05,1);
+                cubeVerticies[2] = vec4(0.3,0.4,0.05,1);
+                cubeVerticies[3] = vec4(0.3,0.4,-0.05,1);
+                cubeVerticies[4] = vec4(0.4,0.3,-0.05,1);
+                cubeVerticies[5] = vec4(0.4,0.3,0.05,1);
+                cubeVerticies[6] = vec4(0.3,0.3,0.05,1);
+                cubeVerticies[7] = vec4(0.3,0.3,-0.05,1);
+                k = (int)key - 49;
+                isOccupied[5] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '7':
-            cubeVerticies[0] = vec4(-0.4,0.4,0.4,1);
-            cubeVerticies[1] = vec4(-0.4,0.4,0.3,1);
-            cubeVerticies[2] = vec4(-0.3,0.4,0.3,1);
-            cubeVerticies[3] = vec4(-0.3,0.4,0.4,1);
-            cubeVerticies[4] = vec4(-0.4,0.3,0.4,1);
-            cubeVerticies[5] = vec4(-0.4,0.3,0.3,1);
-            cubeVerticies[6] = vec4(-0.3,0.3,0.3,1);
-            cubeVerticies[7] = vec4(-0.3,0.3,0.4,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[6] == 0){
+                cubeVerticies[0] = vec4(-0.4,0.4,0.4,1);
+                cubeVerticies[1] = vec4(-0.4,0.4,0.3,1);
+                cubeVerticies[2] = vec4(-0.3,0.4,0.3,1);
+                cubeVerticies[3] = vec4(-0.3,0.4,0.4,1);
+                cubeVerticies[4] = vec4(-0.4,0.3,0.4,1);
+                cubeVerticies[5] = vec4(-0.4,0.3,0.3,1);
+                cubeVerticies[6] = vec4(-0.3,0.3,0.3,1);
+                cubeVerticies[7] = vec4(-0.3,0.3,0.4,1);
+                k = (int)key - 49;
+                isOccupied[6] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '8':
-            cubeVerticies[0] = vec4(0.05,0.4,0.4,1);
-            cubeVerticies[1] = vec4(0.05,0.4,0.3,1);
-            cubeVerticies[2] = vec4(-0.05,0.4,0.3,1);
-            cubeVerticies[3] = vec4(-0.05,0.4,0.4,1);
-            cubeVerticies[4] = vec4(0.05,0.3,0.4,1);
-            cubeVerticies[5] = vec4(0.05,0.3,0.3,1);
-            cubeVerticies[6] = vec4(-0.05,0.3,0.3,1);
-            cubeVerticies[7] = vec4(-0.05,0.3,0.4,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[7] == 0){
+                cubeVerticies[0] = vec4(0.05,0.4,0.4,1);
+                cubeVerticies[1] = vec4(0.05,0.4,0.3,1);
+                cubeVerticies[2] = vec4(-0.05,0.4,0.3,1);
+                cubeVerticies[3] = vec4(-0.05,0.4,0.4,1);
+                cubeVerticies[4] = vec4(0.05,0.3,0.4,1);
+                cubeVerticies[5] = vec4(0.05,0.3,0.3,1);
+                cubeVerticies[6] = vec4(-0.05,0.3,0.3,1);
+                cubeVerticies[7] = vec4(-0.05,0.3,0.4,1);
+                k = (int)key - 49;
+                isOccupied[7] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
         case '9':
-            cubeVerticies[0] = vec4(0.4,0.4,0.4,1);
-            cubeVerticies[1] = vec4(0.4,0.4,0.3,1);
-            cubeVerticies[2] = vec4(0.3,0.4,0.3,1);
-            cubeVerticies[3] = vec4(0.3,0.4,0.4,1);
-            cubeVerticies[4] = vec4(0.4,0.3,0.4,1);
-            cubeVerticies[5] = vec4(0.4,0.3,0.3,1);
-            cubeVerticies[6] = vec4(0.3,0.3,0.3,1);
-            cubeVerticies[7] = vec4(0.3,0.3,0.4,1);
-            k = (int)key - 49;
-            makeMove(k);
+            if(isOccupied[8] == 0){
+                cubeVerticies[0] = vec4(0.4,0.4,0.4,1);
+                cubeVerticies[1] = vec4(0.4,0.4,0.3,1);
+                cubeVerticies[2] = vec4(0.3,0.4,0.3,1);
+                cubeVerticies[3] = vec4(0.3,0.4,0.4,1);
+                cubeVerticies[4] = vec4(0.4,0.3,0.4,1);
+                cubeVerticies[5] = vec4(0.4,0.3,0.3,1);
+                cubeVerticies[6] = vec4(0.3,0.3,0.3,1);
+                cubeVerticies[7] = vec4(0.3,0.3,0.4,1);
+                k = (int)key - 49;
+                isOccupied[8] = getPlayerNumber();
+                makeMove(k);
+            }
             break;
     }
 }
@@ -345,7 +386,7 @@ void keyboard( unsigned char key, int x, int y )
 void makeMove(int position){
     float x = coordinates[position].x;
     float z = coordinates[position].y;
-    if(player1){
+    if(playerCube){
         Cube* newCube = new Cube();
         newCube -> setVertices(cubeVerticies[0], cubeVerticies[1], cubeVerticies[2], cubeVerticies[3], cubeVerticies[4], cubeVerticies[5], cubeVerticies[6], cubeVerticies[7]);
         newCube->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
@@ -357,8 +398,121 @@ void makeMove(int position){
         newSphere->setModelMatrix(Translate(x, .7, z));  //scale it
         drawables.push_back(newSphere);
     }
-    player1 = !player1;
+    playerCube = !playerCube;
     glutPostRedisplay();
+    checkForWin();
+}
+
+int getPlayerNumber(){
+    if(playerCube){
+        return 1;
+    }
+    else{
+        return 2;
+    }
+}
+
+void checkForWin(){
+    
+    //  0   1   2
+    //  3   4   5
+    //  6   7   8
+    
+    if(isOccupied[0] == isOccupied[1] && isOccupied[1] == isOccupied[2] && isOccupied[2] != 0){
+        //Top Across
+        if(isOccupied[0] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    else if(isOccupied[3] == isOccupied[4] && isOccupied[4] == isOccupied[5] && isOccupied[5] != 0){
+        //Middle Across
+        if(isOccupied[3] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    else if(isOccupied[6] == isOccupied[7] && isOccupied[7] == isOccupied[8] && isOccupied[8] != 0){
+        //Bottom Across
+        if(isOccupied[6] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    
+    else if(isOccupied[0] == isOccupied[3] && isOccupied[3] == isOccupied[6] && isOccupied[6] != 0){
+        //Left Down
+        if(isOccupied[0] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    else if(isOccupied[1] == isOccupied[4] && isOccupied[4] == isOccupied[7] && isOccupied[7] != 0){
+        //Middle Down
+        if(isOccupied[1] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    else if(isOccupied[2] == isOccupied[5] && isOccupied[5] == isOccupied[8] && isOccupied[8] != 0){
+        //Right Down
+        if(isOccupied[2] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    
+    else if(isOccupied[0] == isOccupied[4] && isOccupied[4] == isOccupied[8] && isOccupied[8] != 0){
+        //Top Left to Bottom Right
+        if(isOccupied[0] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    else if(isOccupied[2] == isOccupied[4] && isOccupied[4] == isOccupied[6] && isOccupied[6] != 0){
+        //Top Right to Bottom Left
+        if(isOccupied[2] == 1){
+            cubeWins();
+        }
+        else{
+            sphereWins();
+        }
+    }
+    else{
+        int points = 0;
+        for(int i = 0; i < 9; i++){
+            points = points + isOccupied[i];
+        }
+        if(points == 14){
+            noWins();
+        }
+    }
+}
+
+void cubeWins(){
+    //Run if 3 Cubes in a row
+}
+
+void sphereWins(){
+    //Run if 3 Spheres in a row
+}
+
+void noWins(){
+    //Run if out of moves
 }
 
 void specialKeyboard( int key, int x, int y )
