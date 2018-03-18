@@ -192,6 +192,7 @@ void resize(int w, int h) {
 //Keyboard event callback
 void keyboard( unsigned char key, int x, int y )
 {
+    int k;
     switch( key ) {
         case ' ':
             if(using2){
@@ -231,18 +232,18 @@ void keyboard( unsigned char key, int x, int y )
             glutPostRedisplay();
             break;
         case '1':
-            /*
-             cubeVerticies[0] = vec4(-0.4,0.4,-0.4,1);
-             cubeVerticies[1] = vec4(-0.4,0.4,-0.3,1);
-             cubeVerticies[2] = vec4(-0.3,0.4,-0.3,1);
-             cubeVerticies[3] = vec4(-0.3,0.4,-0.4,1);
-             cubeVerticies[4] = vec4(-0.4,0.3,-0.4,1);
-             cubeVerticies[5] = vec4(-0.4,0.3,-0.3,1);
-             cubeVerticies[6] = vec4(-0.3,0.3,-0.3,1);
-             cubeVerticies[7] = vec4(-0.3,0.3,-0.4,1);
-             */
+            cubeVerticies[0] = vec4(-0.4,0.4,-0.4,1);
+            cubeVerticies[1] = vec4(-0.4,0.4,-0.3,1);
+            cubeVerticies[2] = vec4(-0.3,0.4,-0.3,1);
+            cubeVerticies[3] = vec4(-0.3,0.4,-0.4,1);
+            cubeVerticies[4] = vec4(-0.4,0.3,-0.4,1);
+            cubeVerticies[5] = vec4(-0.4,0.3,-0.3,1);
+            cubeVerticies[6] = vec4(-0.3,0.3,-0.3,1);
+            cubeVerticies[7] = vec4(-0.3,0.3,-0.4,1);
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '2':
-            /*
             cubeVerticies[0] = vec4(0.05,0.4,-0.4,1);
             cubeVerticies[1] = vec4(0.05,0.4,-0.3,1);
             cubeVerticies[2] = vec4(-0.05,0.4,-0.3,1);
@@ -251,9 +252,10 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(0.05,0.3,-0.3,1);
             cubeVerticies[6] = vec4(-0.05,0.3,-0.3,1);
             cubeVerticies[7] = vec4(-0.05,0.3,-0.4,1);
-             */
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '3':
-            /*
             cubeVerticies[0] = vec4(0.4,0.4,-0.4,1);
             cubeVerticies[1] = vec4(0.4,0.4,-0.3,1);
             cubeVerticies[2] = vec4(0.3,0.4,-0.3,1);
@@ -262,9 +264,10 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(0.4,0.3,-0.3,1);
             cubeVerticies[6] = vec4(0.3,0.3,-0.3,1);
             cubeVerticies[7] = vec4(0.3,0.3,-0.4,1);
-             */
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '4':
-            /*
             cubeVerticies[0] = vec4(-0.4,0.4,-0.05,1);
             cubeVerticies[1] = vec4(-0.4,0.4,0.05,1);
             cubeVerticies[2] = vec4(-0.3,0.4,0.05,1);
@@ -273,9 +276,10 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(-0.4,0.3,0.05,1);
             cubeVerticies[6] = vec4(-0.3,0.3,0.05,1);
             cubeVerticies[7] = vec4(-0.3,0.3,-0.05,1);
-             */
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '5':
-            /*
             cubeVerticies[0] = vec4(0.05,0.4,-0.05,1);
             cubeVerticies[1] = vec4(0.05,0.4,0.05,1);
             cubeVerticies[2] = vec4(-0.05,0.4,0.05,1);
@@ -284,9 +288,10 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(0.05,0.3,0.05,1);
             cubeVerticies[6] = vec4(-0.05,0.3,0.05,1);
             cubeVerticies[7] = vec4(-0.05,0.3,-0.05,1);
-             */
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '6':
-            /*
             cubeVerticies[0] = vec4(0.4,0.4,-0.05,1);
             cubeVerticies[1] = vec4(0.4,0.4,0.05,1);
             cubeVerticies[2] = vec4(0.3,0.4,0.05,1);
@@ -295,9 +300,10 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(0.4,0.3,0.05,1);
             cubeVerticies[6] = vec4(0.3,0.3,0.05,1);
             cubeVerticies[7] = vec4(0.3,0.3,-0.05,1);
-             */
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '7':
-            /*
             cubeVerticies[0] = vec4(-0.4,0.4,0.4,1);
             cubeVerticies[1] = vec4(-0.4,0.4,0.3,1);
             cubeVerticies[2] = vec4(-0.3,0.4,0.3,1);
@@ -306,9 +312,10 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(-0.4,0.3,0.3,1);
             cubeVerticies[6] = vec4(-0.3,0.3,0.3,1);
             cubeVerticies[7] = vec4(-0.3,0.3,0.4,1);
-             */
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '8':
-            /*
             cubeVerticies[0] = vec4(0.05,0.4,0.4,1);
             cubeVerticies[1] = vec4(0.05,0.4,0.3,1);
             cubeVerticies[2] = vec4(-0.05,0.4,0.3,1);
@@ -317,9 +324,10 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(0.05,0.3,0.3,1);
             cubeVerticies[6] = vec4(-0.05,0.3,0.3,1);
             cubeVerticies[7] = vec4(-0.05,0.3,0.4,1);
-             */
+            k = (int)key - 49;
+            makeMove(k);
+            break;
         case '9':
-            /*
             cubeVerticies[0] = vec4(0.4,0.4,0.4,1);
             cubeVerticies[1] = vec4(0.4,0.4,0.3,1);
             cubeVerticies[2] = vec4(0.3,0.4,0.3,1);
@@ -328,8 +336,7 @@ void keyboard( unsigned char key, int x, int y )
             cubeVerticies[5] = vec4(0.4,0.3,0.3,1);
             cubeVerticies[6] = vec4(0.3,0.3,0.3,1);
             cubeVerticies[7] = vec4(0.3,0.3,0.4,1);
-             */
-            int k = (int)key - 49;
+            k = (int)key - 49;
             makeMove(k);
             break;
     }
