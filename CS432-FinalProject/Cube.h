@@ -19,6 +19,7 @@ public:
     void setMaterial(vec4, vec4, vec4, float);
     void draw(Camera*, vector<Light>, vector<bool>);
     void setVertices(vec4, vec4, vec4, vec4, vec4, vec4, vec4, vec4);
+    vec3 getCenter();
     
 private:
     static const unsigned int numVertices = 6 * 2 * 3;

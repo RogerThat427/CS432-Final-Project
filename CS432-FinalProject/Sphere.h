@@ -18,6 +18,7 @@ public:
     void setMaterial(vec4, vec4, vec4, float);
     void draw(Camera*, vector<Light>, vector<bool>);
     ~Sphere();
+    vec3 getCenter();
 private:
     static const unsigned int numVertices = 3072;
     vec4 vertexLocations[numVertices];

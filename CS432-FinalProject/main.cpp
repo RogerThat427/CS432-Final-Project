@@ -50,6 +50,9 @@ Cube* legTwo;
 Cube* legThree;
 Cube* legFour;
 
+vector<Cube*> cubePieces;
+vector<Sphere*> spherePieces;
+
 Camera* cam;
 Camera* cam1;
 Camera* cam2;
@@ -81,7 +84,6 @@ int main(int argc, char **argv)
     for(int i = 0; i < 9; i++){
         isOccupied[i] = false;
     }
-    
     
     //initialize GLUT
     glutInit(&argc, argv);
@@ -392,11 +394,13 @@ void makeMove(int position){
         newCube->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
         newCube->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
         drawables.push_back(newCube);
+        cubePieces.push_back(newCube);
     } else {
         Sphere* newSphere = new Sphere();
         newSphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
         newSphere->setModelMatrix(Translate(x, .7, z));  //scale it
         drawables.push_back(newSphere);
+        spherePieces.push_back(newSphere);
     }
     playerCube = !playerCube;
     glutPostRedisplay();
@@ -505,10 +509,18 @@ void checkForWin(){
 
 void cubeWins(){
     //Run if 3 Cubes in a row
+    for(int i = 0; i < cubePieces.size(); i++){
+        vec3 centers = cubePieces.at(i)->getCenter();
+        cubePieces.at(i)->setModelMatrix(Scale(2,2,2) * Translate(centers[0], centers[1], centers[2]) * RotateY(10) * Translate(-centers[0], -centers[1], -centers[2]));
+    }
 }
 
 void sphereWins(){
     //Run if 3 Spheres in a row
+    for(int i = 0; i < spherePieces.size(); i++){
+        vec3 centers = spherePieces.at(i)->getCenter();
+        spherePieces.at(i)->setModelMatrix(Translate(centers[0], centers[1], centers[2]) * RotateY(10) * Translate(-centers[0], -centers[1], -centers[2]));
+    }
 }
 
 void noWins(){

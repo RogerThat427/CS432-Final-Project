@@ -89,6 +89,22 @@ void Cube::buildCube() {
 	makeQuad(5, 4, 0, 1);  //left
 }
 
+vec3 Cube::getCenter(){
+    double xcenter = 1.0 * vertices[0][0];
+    double ycenter = 1.0 * vertices[0][1];
+    double zcenter = 1.0 * vertices[0][2];
+    for(int i = 1; i <8; i++){
+        xcenter = xcenter + vertices[i][0];
+        ycenter = ycenter + vertices[i][1];
+        zcenter = zcenter + vertices[i][2];
+    }
+    xcenter = xcenter / 8.0;
+    ycenter = ycenter / 8.0;
+    zcenter = zcenter / 8.0;
+    vec3 centers = vec3(xcenter,ycenter,zcenter);
+    return centers;
+}
+
 void Cube::setMaterial(vec4 a, vec4 d, vec4 s, float sh) {
     diffuse = d;
     specular = s;
