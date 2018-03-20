@@ -14,11 +14,11 @@ class Cube: public Drawable{
 
 
 public:
-	Cube();
+	Cube(vec4 newVertices[8]);
 	~Cube();
     void setMaterial(vec4, vec4, vec4, float);
     void draw(Camera*, vector<Light>, vector<bool>);
-    void setVertices(vec4, vec4, vec4, vec4, vec4, vec4, vec4, vec4);
+    void setVertices(vec4 newVertices[8]);
     vec3 getCenter();
     
 private:
@@ -38,7 +38,6 @@ private:
     unsigned int index;
     vec4 vertexLocations[numVertices];
     vec3 vertexNormals[numVertices];
-
     vec4 vertices[8];
 	
 };

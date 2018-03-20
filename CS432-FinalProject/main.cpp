@@ -9,6 +9,7 @@
 #include "Sphere.h"  //blue box object!
 #include "Cube.h"
 #include "Plane.h"
+#include "Table.h"
 
 //Forward declarations
 void init(void);
@@ -41,15 +42,9 @@ vec4 cubeVerticies[8];
 int isOccupied[9];
 
 
-
 //Objects
 Plane* plane;
-Cube* tableTop;
-Cube* legOne;
-Cube* legTwo;
-Cube* legThree;
-Cube* legFour;
-
+Table* table;
 vector<Cube*> cubePieces;
 vector<Sphere*> spherePieces;
 
@@ -125,7 +120,7 @@ int main(int argc, char **argv)
 // Initialization
 void init()
 {
-    glClearColor(1.0, 1.0, 1.0, 1.0);
+    glClearColor(0.3, 0.8, 1, 1.0);
     glEnable(GL_DEPTH_TEST);
     
     cam2 = new Camera(0,.5,10,true);
@@ -136,44 +131,13 @@ void init()
     enabled.push_back(true);
     enabled.push_back(true);
     
-    tableTop = new Cube();
-    legOne = new Cube();
-    legTwo = new Cube();
-    legThree = new Cube();
-    legFour = new Cube();
     
-    tableTop -> setVertices(vec4(0.6,0.3,0.5,1),vec4(0.6,0.3,-0.5,1),vec4(-0.6,0.3,-0.5,1),vec4(-0.6,0.3,0.5,1),vec4(0.6,0.2,0.5,1),vec4(.6,.2,-.5,1),vec4(-0.6,0.2,-0.5,1),vec4(-0.6,0.2,0.5,1));
-    
-    legOne -> setVertices(vec4(0.5,0.2,0.4,1), vec4(0.5,0.2,0.3,1), vec4(0.4,0.2,0.3,1), vec4(0.4,0.2,0.4,1), vec4(0.5,-0.3,0.4,1), vec4(0.5,-0.3,0.3,1), vec4(0.4,-0.3,0.3,1), vec4(0.4,-0.3,0.4,1));
-    
-    legTwo -> setVertices(vec4(-0.5,0.2,0.4,1), vec4(-0.5,0.2,0.3,1), vec4(-0.4,0.2,0.3,1), vec4(-0.4,0.2,0.4,1), vec4(-0.5,-0.3,0.4,1), vec4(-0.5,-0.3,0.3,1), vec4(-0.4,-0.3,0.3,1), vec4(-0.4,-0.3,0.4,1));
-    
-    legThree -> setVertices(vec4(-0.5,0.2,-0.4,1), vec4(-0.5,0.2,-0.3,1), vec4(-0.4,0.2,-0.3,1), vec4(-0.4,0.2,-0.4,1), vec4(-0.5,-0.3,-0.4,1), vec4(-0.5,-0.3,-0.3,1), vec4(-0.4,-0.3,-0.3,1), vec4(-0.4,-0.3,-0.4,1));
-    
-    legFour -> setVertices(vec4(0.5,0.2,-0.4,1), vec4(0.5,0.2,-0.3,1), vec4(0.4,0.2,-0.3,1), vec4(0.4,0.2,-0.4,1), vec4(0.5,-0.3,-0.4,1), vec4(0.5,-0.3,-0.3,1), vec4(0.4,-0.3,-0.3,1), vec4(0.4,-0.3,-0.4,1));
-    
-    tableTop->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    legOne->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    legTwo->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    legThree->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    legFour->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
-    
-    tableTop->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
-    legOne->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
-    legTwo->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
-    legThree->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
-    legFour->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
-    
-    
-    drawables.push_back(tableTop);
-    drawables.push_back(legOne);
-    drawables.push_back(legTwo);
-    drawables.push_back(legThree);
-    drawables.push_back(legFour);
-    
-    plane = new Plane();
-    plane->setMaterial(material_ambient2, material_diffuse2, material_specular2, material_shininess);
+    vec4 planeVertices[4] = { vec4(-10, -1, 10, 1), vec4(10, -1, 10, 1), vec4(10, -1, -10, 1), vec4(-10, -1, -10, 1)};
+    plane = new Plane(planeVertices, "grass.ppm");
     drawables.push_back(plane);
+    
+    table = new Table();
+    drawables.push_back(table);
     
     //lights
     lights.push_back(Light(light_position0,light_ambient0, light_diffuse0, light_specular0));
@@ -389,8 +353,7 @@ void makeMove(int position){
     float x = coordinates[position].x;
     float z = coordinates[position].y;
     if(playerCube){
-        Cube* newCube = new Cube();
-        newCube -> setVertices(cubeVerticies[0], cubeVerticies[1], cubeVerticies[2], cubeVerticies[3], cubeVerticies[4], cubeVerticies[5], cubeVerticies[6], cubeVerticies[7]);
+        Cube* newCube = new Cube(cubeVerticies);
         newCube->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
         newCube->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
         drawables.push_back(newCube);

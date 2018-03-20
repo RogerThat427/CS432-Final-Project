@@ -1,9 +1,14 @@
-
+//
+//  Plane.hpp
+//  CS432-FinalProject
+//
+//  Created by Mariana Quinde Garcia on 3/20/18.
+//  Copyright © 2018 Roger White. All rights reserved.
+//
 
 #ifndef Plane_h
 #define Plane_h
 
-#include "Angel.h"
 #include "Drawable.h"
 #include "Camera.h"
 #include "Light.h"
@@ -12,25 +17,31 @@
 
 using namespace std;
 
-class Plane:public Drawable {
+class Plane: public Drawable{
+    
+    
 public:
-    Plane();
+    
+    Plane(vec4 vertices[4], string textureName);
+    ~Plane();
+    
     void setMaterial(vec4, vec4, vec4, float);
     void draw(Camera*, vector<Light>, vector<bool>);
-    ~Plane();
-private:
-    static const unsigned int numVertices = 6;
-    vec4 vertexLocations[numVertices] = { vec4(10, -1, 10, 1), vec4(-10, -1, 10, 1), vec4(10, -1, -10, 1), vec4(10, -1, -10, 1), vec4(-10, -1, 10, 1), vec4(-10, -1, -10, 1)};
-    vec3 vertexNormals[numVertices];
-    //shader variable locations
-    GLuint vpos, npos;
-    GLuint mmpos, cmpos, pmpos;
-    GLuint diffuse_loc, spec_loc, ambient_loc, alpha_loc;
-    //material properties
-    vec4 diffuse, specular, ambient;
-    float shine;
-    unsigned int index;
-    void setNormals(vec4, vec4, vec4);
     
+private:
+    GLuint texture;
+    void build(vec4 vertices[6]);
+    vec4 vertexLocations[6];
+    vec2 vertexTextureLocations[6];
+    
+    void makeQuad(vec4, vec4, vec4, vec4);
+    
+    unsigned int index;
+    
+    //uniform transformation matrix variable locations
+    GLuint mmLoc, cmLoc, pmLoc;
+    //uniform texture location
+    GLuint tex_loc;
 };
-#endif /* Plane_hpp */
+#endif
+
