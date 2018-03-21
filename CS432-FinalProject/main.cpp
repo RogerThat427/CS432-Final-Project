@@ -539,13 +539,20 @@ void specialKeyboard( int key, int x, int y )
 void timerCallback(int value)
 {
     theta=theta+5;
-    //if(cubeWinner){
+    if(cubeWinner){
         for(int i = 0; i < cubePieces.size(); i++){
             if(cubePieces.at(i)->getBoardPosition() == winningPos[0] || cubePieces.at(i)->getBoardPosition() == winningPos[1] || cubePieces.at(i)->getBoardPosition() == winningPos[2]){
                 vec3 centers = cubePieces.at(i)->getCenter();
                 cubePieces.at(i)->setModelMatrix(Scale(2,2,2) * Translate(centers[0], centers[1], centers[2]) * RotateY(theta) * Translate(-centers[0], -centers[1], -centers[2]));
             }
-        //}
+        }
+    }
+    else{
+        for(int i = 0; i < spherePieces.size(); i++){
+            if(spherePieces.at(i)->getBoardPosition() == winningPos[0] || spherePieces.at(i)->getBoardPosition() == winningPos[1] || spherePieces.at(i)->getBoardPosition() == winningPos[2]){
+                //Sphere Spinning Stuff
+            }
+        }
     }
     glutTimerFunc(50, timerCallback, value);
     glutPostRedisplay();

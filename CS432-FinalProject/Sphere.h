@@ -19,6 +19,9 @@ public:
     void draw(Camera*, vector<Light>, vector<bool>);
     ~Sphere();
     vec3 getCenter();
+    void setBoardPosition(int pos);
+    int getBoardPosition();
+    
 private:
     static const unsigned int numVertices = 3072;
     vec4 vertexLocations[numVertices];
@@ -38,5 +41,7 @@ private:
     void divideTriangle(vec4, vec4, vec4,int);
     void triangle(vec4, vec4, vec4);
     vec4 unit(vec4);
+    
+    int boardPosition;
 };
 #endif
