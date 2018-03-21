@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D7F30872060E2B000491B70 /* Table.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D7F30852060E2B000491B70 /* Table.cpp */; };
 		E5A562DF205B292F00822B7B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A562DE205B292F00822B7B /* OpenGL.framework */; };
 		E5A562E1205B293400822B7B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A562E0205B293400822B7B /* GLUT.framework */; };
 		E5A562F3205B296500822B7B /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5A562E3205B296500822B7B /* Camera.cpp */; };
@@ -31,6 +32,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8D7F30852060E2B000491B70 /* Table.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Table.cpp; sourceTree = "<group>"; };
+		8D7F30862060E2B000491B70 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table.h; sourceTree = "<group>"; };
+		8D7F30882060EBB100491B70 /* fshaderTM_v150.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = fshaderTM_v150.glsl; path = DerivedData/Build/Products/Debug/fshaderTM_v150.glsl; sourceTree = "<group>"; };
+		8D7F30892060EBB100491B70 /* vshaderTM_v150.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vshaderTM_v150.glsl; path = DerivedData/Build/Products/Debug/vshaderTM_v150.glsl; sourceTree = "<group>"; };
+		8DDD366F2060385700BD3B91 /* fshader00_v150.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = fshader00_v150.glsl; path = DerivedData/Build/Products/Debug/fshader00_v150.glsl; sourceTree = "<group>"; };
+		8DDD36702060385700BD3B91 /* fshader01_v150.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = fshader01_v150.glsl; path = DerivedData/Build/Products/Debug/fshader01_v150.glsl; sourceTree = "<group>"; };
+		8DDD36712060385700BD3B91 /* fshaderLighting_v150.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = fshaderLighting_v150.glsl; path = DerivedData/Build/Products/Debug/fshaderLighting_v150.glsl; sourceTree = "<group>"; };
+		8DDD36722060385700BD3B91 /* vshader01_v150.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vshader01_v150.glsl; path = DerivedData/Build/Products/Debug/vshader01_v150.glsl; sourceTree = "<group>"; };
+		8DDD36732060385700BD3B91 /* vshaderLighting_v150.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vshaderLighting_v150.glsl; path = DerivedData/Build/Products/Debug/vshaderLighting_v150.glsl; sourceTree = "<group>"; };
 		E5A562D3205B292600822B7B /* CS432-FinalProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "CS432-FinalProject"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5A562DE205B292F00822B7B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		E5A562E0205B293400822B7B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -69,6 +79,13 @@
 		E5A562CA205B292600822B7B = {
 			isa = PBXGroup;
 			children = (
+				8DDD366F2060385700BD3B91 /* fshader00_v150.glsl */,
+				8DDD36702060385700BD3B91 /* fshader01_v150.glsl */,
+				8DDD36712060385700BD3B91 /* fshaderLighting_v150.glsl */,
+				8DDD36722060385700BD3B91 /* vshader01_v150.glsl */,
+				8DDD36732060385700BD3B91 /* vshaderLighting_v150.glsl */,
+				8D7F30882060EBB100491B70 /* fshaderTM_v150.glsl */,
+				8D7F30892060EBB100491B70 /* vshaderTM_v150.glsl */,
 				E5A562D5205B292600822B7B /* CS432-FinalProject */,
 				E5A562D4205B292600822B7B /* Products */,
 				E5A562DD205B292E00822B7B /* Frameworks */,
@@ -90,6 +107,8 @@
 				E5A562E3205B296500822B7B /* Camera.cpp */,
 				E5A562E4205B296500822B7B /* Camera.h */,
 				E5A562E5205B296500822B7B /* CheckError.h */,
+				8D7F30852060E2B000491B70 /* Table.cpp */,
+				8D7F30862060E2B000491B70 /* Table.h */,
 				E5A562E6205B296500822B7B /* Cube.cpp */,
 				E5A562E7205B296500822B7B /* Cube.h */,
 				E5A562E8205B296500822B7B /* Drawable.cpp */,
@@ -175,6 +194,7 @@
 			files = (
 				E5A562F8205B296500822B7B /* Plane.cpp in Sources */,
 				E5A562F5205B296500822B7B /* Drawable.cpp in Sources */,
+				8D7F30872060E2B000491B70 /* Table.cpp in Sources */,
 				E5A562F4205B296500822B7B /* Cube.cpp in Sources */,
 				E5A562F6205B296500822B7B /* InitShader.cpp in Sources */,
 				E5A562F9205B296500822B7B /* Sphere.cpp in Sources */,
@@ -278,6 +298,7 @@
 		E5A562DB205B292600822B7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -285,6 +306,7 @@
 		E5A562DC205B292600822B7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -308,6 +330,7 @@
 				E5A562DC205B292600822B7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
