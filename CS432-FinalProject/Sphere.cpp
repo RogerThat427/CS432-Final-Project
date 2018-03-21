@@ -109,23 +109,6 @@ void Sphere::triangle(vec4 ai, vec4 bi, vec4 ci){
     
 }
 
-vec3 Sphere::getCenter(){
-    float xCenter = 1.0 * vertexLocations[0][0];
-    float yCenter = 1.0 * vertexLocations[0][1];
-    float zCenter = 1.0 * vertexLocations[0][2];
-    
-    for(int i = 1; i < numVertices;i++){
-        xCenter = xCenter + vertexLocations[i][0];
-        yCenter  = yCenter + vertexLocations[i][1];
-        zCenter = zCenter + vertexLocations[i][2];
-    }
-    xCenter = xCenter / numVertices;
-    yCenter = yCenter / numVertices;
-    zCenter = zCenter / numVertices;
-    vec3 centers = vec3(xCenter,yCenter,zCenter);
-    return centers;
-}
-
 void Sphere::setMaterial(vec4 a, vec4 d, vec4 s, float sh) {
     diffuse = d;
     specular = s;
