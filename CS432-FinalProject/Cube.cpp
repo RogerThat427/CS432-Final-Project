@@ -148,3 +148,11 @@ void Cube::draw(Camera *cam, vector<Light> lights, vector<bool> enabled) {
     glDrawArrays(GL_TRIANGLES, 0,numVertices);
     
 }
+
+void Cube::setBoardPosition(int pos){
+    boardPosition = pos;
+}
+
+int Cube::getBoardPosition(){
+    return boardPosition;
+}

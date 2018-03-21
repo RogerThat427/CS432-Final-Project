@@ -42,6 +42,7 @@ vec4 light_specular1( 1.0, 1.0, 1.0, 1.0 );
 
 vec4 cubeVerticies[8];
 int isOccupied[9];
+int winningPos[3];
 
 
 //Objects
@@ -360,6 +361,7 @@ void makeMove(int position){
         Cube* newCube = new Cube(cubeVerticies);
         newCube->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
         newCube->setModelMatrix(Scale(2, 2, 2)*Translate(0, 0, 0));  //scale it
+        newCube->setBoardPosition(position);
         drawables.push_back(newCube);
         cubePieces.push_back(newCube);
     } else {
@@ -391,6 +393,9 @@ void checkForWin(){
     
     if(isOccupied[0] == isOccupied[1] && isOccupied[1] == isOccupied[2] && isOccupied[2] != 0){
         //Top Across
+        winningPos[0] = 0;
+        winningPos[1] = 1;
+        winningPos[2] = 2;
         if(isOccupied[0] == 1){
             cubeWins();
         }
@@ -400,6 +405,9 @@ void checkForWin(){
     }
     else if(isOccupied[3] == isOccupied[4] && isOccupied[4] == isOccupied[5] && isOccupied[5] != 0){
         //Middle Across
+        winningPos[0] = 3;
+        winningPos[1] = 4;
+        winningPos[2] = 5;
         if(isOccupied[3] == 1){
             cubeWins();
         }
@@ -409,6 +417,9 @@ void checkForWin(){
     }
     else if(isOccupied[6] == isOccupied[7] && isOccupied[7] == isOccupied[8] && isOccupied[8] != 0){
         //Bottom Across
+        winningPos[0] = 6;
+        winningPos[1] = 7;
+        winningPos[2] = 8;
         if(isOccupied[6] == 1){
             cubeWins();
         }
@@ -419,6 +430,9 @@ void checkForWin(){
     
     else if(isOccupied[0] == isOccupied[3] && isOccupied[3] == isOccupied[6] && isOccupied[6] != 0){
         //Left Down
+        winningPos[0] = 0;
+        winningPos[1] = 3;
+        winningPos[2] = 6;
         if(isOccupied[0] == 1){
             cubeWins();
         }
@@ -428,6 +442,9 @@ void checkForWin(){
     }
     else if(isOccupied[1] == isOccupied[4] && isOccupied[4] == isOccupied[7] && isOccupied[7] != 0){
         //Middle Down
+        winningPos[0] = 1;
+        winningPos[1] = 4;
+        winningPos[2] = 7;
         if(isOccupied[1] == 1){
             cubeWins();
         }
@@ -437,6 +454,9 @@ void checkForWin(){
     }
     else if(isOccupied[2] == isOccupied[5] && isOccupied[5] == isOccupied[8] && isOccupied[8] != 0){
         //Right Down
+        winningPos[0] = 2;
+        winningPos[1] = 5;
+        winningPos[2] = 8;
         if(isOccupied[2] == 1){
             cubeWins();
         }
@@ -447,6 +467,9 @@ void checkForWin(){
     
     else if(isOccupied[0] == isOccupied[4] && isOccupied[4] == isOccupied[8] && isOccupied[8] != 0){
         //Top Left to Bottom Right
+        winningPos[0] = 0;
+        winningPos[1] = 4;
+        winningPos[2] = 8;
         if(isOccupied[0] == 1){
             cubeWins();
         }
@@ -456,6 +479,9 @@ void checkForWin(){
     }
     else if(isOccupied[2] == isOccupied[4] && isOccupied[4] == isOccupied[6] && isOccupied[6] != 0){
         //Top Right to Bottom Left
+        winningPos[0] = 2;
+        winningPos[1] = 4;
+        winningPos[2] = 6;
         if(isOccupied[2] == 1){
             cubeWins();
         }
@@ -515,8 +541,10 @@ void timerCallback(int value)
     theta=theta+5;
     //if(cubeWinner){
         for(int i = 0; i < cubePieces.size(); i++){
-            vec3 centers = cubePieces.at(i)->getCenter();
-            cubePieces.at(i)->setModelMatrix(Scale(2,2,2) * Translate(centers[0], centers[1], centers[2]) * RotateY(theta) * Translate(-centers[0], -centers[1], -centers[2]));
+            if(cubePieces.at(i)->getBoardPosition() == winningPos[0] || cubePieces.at(i)->getBoardPosition() == winningPos[1] || cubePieces.at(i)->getBoardPosition() == winningPos[2]){
+                vec3 centers = cubePieces.at(i)->getCenter();
+                cubePieces.at(i)->setModelMatrix(Scale(2,2,2) * Translate(centers[0], centers[1], centers[2]) * RotateY(theta) * Translate(-centers[0], -centers[1], -centers[2]));
+            }
         //}
     }
     glutTimerFunc(50, timerCallback, value);
