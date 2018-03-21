@@ -157,3 +157,11 @@ void Sphere::draw(Camera *cam, vector<Light> lights, vector<bool> enabled) {
     glDrawArrays(GL_TRIANGLES,0, numVertices);
     
 }
+
+void Sphere::setBoardPosition(int pos){
+    boardPosition = pos;
+}
+
+int Sphere::getBoardPosition(){
+    return boardPosition;
+}

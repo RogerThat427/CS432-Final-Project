@@ -20,6 +20,8 @@ public:
     void draw(Camera*, vector<Light>, vector<bool>);
     void setVertices(vec4 newVertices[8]);
     vec3 getCenter();
+    void setBoardPosition(int pos);
+    int getBoardPosition();
     
 private:
     static const unsigned int numVertices = 6 * 2 * 3;
@@ -39,6 +41,8 @@ private:
     vec4 vertexLocations[numVertices];
     vec3 vertexNormals[numVertices];
     vec4 vertices[8];
+    
+    int boardPosition;
 	
 };
 
