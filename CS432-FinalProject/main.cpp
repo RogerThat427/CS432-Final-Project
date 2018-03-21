@@ -58,9 +58,11 @@ vector<Light> lights;
 vector<Drawable*>drawables;
 vector<bool>enabled;
 double theta = 0;
+double alpha = 1;
 int interval = 1;
 bool using2 = false;
 bool playerCube = false;
+bool growing = true;
 vec4 material_ambient( 1.0, 0.0, 1.0, 1.0 );
 vec4 material_diffuse( 1.0, 0.8, 0.0, 1.0 );
 vec4 material_specular( 1.0, 0.8, 0.0, 1.0 );
@@ -367,7 +369,10 @@ void makeMove(int position){
     } else {
         Sphere* newSphere = new Sphere();
         newSphere->setMaterial(material_ambient, material_diffuse, material_specular, material_shininess);
+        newSphere->x = x;
+        newSphere->z = z;
         newSphere->setModelMatrix(Translate(x, .7, z));  //scale it
+        newSphere->setBoardPosition(position);
         drawables.push_back(newSphere);
         spherePieces.push_back(newSphere);
     }
@@ -508,10 +513,8 @@ void cubeWins(){
 
 void sphereWins(){
     //Run if 3 Spheres in a row
-    for(int i = 0; i < spherePieces.size(); i++){
-        vec3 centers = spherePieces.at(i)->getCenter();
-        spherePieces.at(i)->setModelMatrix(Translate(centers[0], centers[1], centers[2]) * RotateY(10) * Translate(-centers[0], -centers[1], -centers[2]));
-    }
+    cubeWinner = false;
+    glutTimerFunc(50, timerCallback, 0);
 }
 
 void noWins(){
@@ -539,6 +542,15 @@ void specialKeyboard( int key, int x, int y )
 void timerCallback(int value)
 {
     theta=theta+5;
+    
+    if(growing) {
+        alpha=alpha+0.05;
+        if(alpha > 2) growing = false;
+    } else {
+        alpha=alpha-0.05;
+        if(alpha < 1) growing = true;
+    }
+    
     if(cubeWinner){
         for(int i = 0; i < cubePieces.size(); i++){
             if(cubePieces.at(i)->getBoardPosition() == winningPos[0] || cubePieces.at(i)->getBoardPosition() == winningPos[1] || cubePieces.at(i)->getBoardPosition() == winningPos[2]){
@@ -550,10 +562,12 @@ void timerCallback(int value)
     else{
         for(int i = 0; i < spherePieces.size(); i++){
             if(spherePieces.at(i)->getBoardPosition() == winningPos[0] || spherePieces.at(i)->getBoardPosition() == winningPos[1] || spherePieces.at(i)->getBoardPosition() == winningPos[2]){
-                //Sphere Spinning Stuff
+                spherePieces.at(i)->setModelMatrix(Translate(spherePieces.at(i)->x, 0.7, spherePieces.at(i)->z)*Scale(alpha,alpha,alpha));
             }
         }
     }
+    
+    
     glutTimerFunc(50, timerCallback, value);
     glutPostRedisplay();
 }
