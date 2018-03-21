@@ -27,6 +27,8 @@ void cubeWins();
 void sphereWins();
 void noWins();
 
+bool cubeWinner, sphereWinner;
+
 vec4 light_position0(0,0,0,0 );
 vec4 light_position1(0, 0, 0, 0.0 );
 
@@ -54,7 +56,7 @@ Camera* cam2;
 vector<Light> lights;
 vector<Drawable*>drawables;
 vector<bool>enabled;
-double theta = 45;
+double theta = 0;
 int interval = 1;
 bool using2 = false;
 bool playerCube = false;
@@ -79,6 +81,9 @@ int main(int argc, char **argv)
     for(int i = 0; i < 9; i++){
         isOccupied[i] = false;
     }
+    
+    cubeWinner = false;
+    sphereWinner = false;
     
     //initialize GLUT
     glutInit(&argc, argv);
@@ -142,7 +147,6 @@ void init()
     //lights
     lights.push_back(Light(light_position0,light_ambient0, light_diffuse0, light_specular0));
     lights.push_back(Light(light_position1,light_ambient1, light_diffuse1, light_specular1));
-    glutTimerFunc(10,timerCallback,0);
     
 }
 
@@ -472,10 +476,8 @@ void checkForWin(){
 
 void cubeWins(){
     //Run if 3 Cubes in a row
-    for(int i = 0; i < cubePieces.size(); i++){
-        vec3 centers = cubePieces.at(i)->getCenter();
-        cubePieces.at(i)->setModelMatrix(Scale(2,2,2) * Translate(centers[0], centers[1], centers[2]) * RotateY(10) * Translate(-centers[0], -centers[1], -centers[2]));
-    }
+    cubeWinner = true;
+    glutTimerFunc(50, timerCallback, 0);
 }
 
 void sphereWins(){
@@ -510,16 +512,14 @@ void specialKeyboard( int key, int x, int y )
 
 void timerCallback(int value)
 {
-    theta=theta+0.1;
-    
-    if(theta==360.1){
-        theta = 0;
+    theta=theta+5;
+    //if(cubeWinner){
+        for(int i = 0; i < cubePieces.size(); i++){
+            vec3 centers = cubePieces.at(i)->getCenter();
+            cubePieces.at(i)->setModelMatrix(Scale(2,2,2) * Translate(centers[0], centers[1], centers[2]) * RotateY(theta) * Translate(-centers[0], -centers[1], -centers[2]));
+        //}
     }
-    float rad = theta*2.0*3.14/360;
-    light_position0 = vec4(0,20*sin(rad), 20*cos(rad),0.0 );
-    lights[0] = Light(light_position0,light_ambient0, light_diffuse0, light_specular0);
-    
-    glutTimerFunc(interval, timerCallback, value);
+    glutTimerFunc(50, timerCallback, value);
     glutPostRedisplay();
 }
 
